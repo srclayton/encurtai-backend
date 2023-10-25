@@ -1,0 +1,30 @@
+{
+  "name": "encurtador-de-urls",
+  "version": "1.0.0",
+  "description": "Este e um simples encurtador de URLs construido com o Fastify. O aplicativo permite que voce encurte URLs longas, facilitando o compartilhamento e o acompanhamento de links.",
+  "main": "server.ts",
+  "scripts": {
+    "dev": "tsx watch src/server.ts ",
+    "lint": "eslint src --ext .ts --fix",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Clayton da Silva da Rocha",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "@fastify/jwt": "^7.2.2",
+    "@fastify/rate-limit": "^8.0.3",
+    "@prisma/client": "^5.5.0",
+    "dotenv": "^16.3.1",
+    "fastify": "^4.24.3"
+  },
+  "devDependencies": {
+    "@rocketseat/eslint-config": "^2.1.0",
+    "@types/node": "^20.8.7",
+    "eslint": "^8.51.0",
+    "pino-pretty": "^10.2.3",
+    "prisma": "^5.5.0",
+    "tsx": "^3.14.0",
+    "typescript": "^5.2.2"
+  }
+}
