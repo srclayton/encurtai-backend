@@ -1,5 +1,4 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import jwt from "@fastify/jwt";
 import ControllerBase from "./ControllerBase";
 import User from "../models/User";
 import TokenService from "../services/TokenService";
@@ -35,8 +34,8 @@ export default class UserController extends ControllerBase {
       result.admin,
     );
 
-    const access_token = await TokenService.generateToken(reply, user);
-    const refresh_token = await TokenService.generateRefreshToken(reply, user);
+    const access_token = await TokenService.generateToken(server, user);
+    const refresh_token = await TokenService.generateRefreshToken(server, user);
     return reply.code(200).send({
       access_token,
       refresh_token,

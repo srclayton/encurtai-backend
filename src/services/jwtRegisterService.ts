@@ -27,16 +27,15 @@ export default async function jwtRegisterService(server: FastifyInstance) {
       path.resolve(__dirname, PATCH_JWT_PUBLIC_SIGN_KEY),
       "utf8",
     );
-    const jwtPrivateRefreshKey = readFileSync(
-      path.resolve(__dirname, PATCH_JWT_PRIVATE_REFRESH_KEY),
-      "utf8",
+    server.decorate(
+      "PATCH_JWT_PRIVATE_REFRESH_KEY",
+      PATCH_JWT_PRIVATE_REFRESH_KEY,
     );
-    server.decorate("jwtPrivateRefreshKey", jwtPrivateRefreshKey);
-    const jwtPublicRefreshKey = readFileSync(
-      path.resolve(__dirname, PATCH_JWT_PUBLIC_REFRESH_KEY),
-      "utf8",
+
+    server.decorate(
+      "PATCH_JWT_PUBLIC_REFRESH_KEY",
+      PATCH_JWT_PUBLIC_REFRESH_KEY,
     );
-    server.decorate("jwtPublicRefreshKey", jwtPublicRefreshKey);
 
     server.register(jwt, {
       secret: {
