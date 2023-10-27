@@ -12,5 +12,9 @@ export default class UserRoutes extends RouteBase {
     server.post(`/${route}/login`, async (request, reply) =>
       controller.verifyLogin(request, reply),
     );
+    // @TODO: ADICIONAR A ROTA REFRESH
+    server.post(`/${route}/refresh`, async (request, reply) =>
+      controller.refreshToken(request, reply),
+    );
   }
 }

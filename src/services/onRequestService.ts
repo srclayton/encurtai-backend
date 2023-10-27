@@ -12,6 +12,25 @@ export default function onRequestService(server: FastifyInstance) {
           .send({ error: "Unauthorized", message: "No authorization header" });
       }
     } else return done();
+    if (request.url === "/user/refresh") {
+      const token = request.headers.authorization.split(" ")[1];
+      try {
+        const decode = server.jwt.verify(token, {
+          // eslint-disable-next-line
+          //@ts-ignore
+          key: server.jwtPublicRefreshKey,
+        });
+        request.user = decode;
+      } catch (err: unknown) {
+        return (
+          reply
+            .code(401) // eslint-disable-next-line
+                      //@ts-ignore
+            .send({ error: "Unauthorized", message: err.message })
+        );
+      }
+      return done();
+    }
     request
       .jwtVerify()
       .catch((err) =>

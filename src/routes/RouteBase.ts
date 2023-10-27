@@ -21,9 +21,5 @@ export default class RouteBase {
     server.post(`/${route}`, async (request, reply) =>
       controller.create(request, reply),
     );
-
-    server.get(`/${route}/ping`, async (request, reply) =>
-      controller.ping(request, reply),
-    );
   }
 }

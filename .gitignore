@@ -6,3 +6,4 @@ etc
 prisma
 .eslintrc.json
 package-lock.json
+dist

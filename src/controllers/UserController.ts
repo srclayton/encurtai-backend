@@ -41,4 +41,21 @@ export default class UserController extends ControllerBase {
       refresh_token,
     });
   }
+
+  public async refreshToken(request: FastifyRequest, reply: FastifyReply) {
+    const { sub } = request.user as { sub: string };
+
+    const result = await this.db.getById(sub);
+    const resultError = this.verifyContent(result);
+    if (resultError) return reply.status(404).send(resultError);
+
+    const user = new User(
+      result.id,
+      result.username,
+      result.password,
+      result.admin,
+    );
+    const access_token = await TokenService.generateToken(server, user);
+    reply.code(200).send({ access_token });
+  }
 }
