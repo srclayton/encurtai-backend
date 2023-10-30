@@ -1,10 +1,10 @@
 import { FastifyInstance } from "fastify";
-import RouteBase from "../routes/RouteBase";
 import UserRoutes from "../routes/UserRoutes";
+import UrlRoutes from "../routes/UrlRoutes";
 
 export default function routesService(server: FastifyInstance) {
   server.register(() => UserRoutes.register(server, "user"));
-  server.register(() => RouteBase.register(server, "url"));
+  server.register(() => UrlRoutes.register(server, "url"));
 
   // server.register();
 }

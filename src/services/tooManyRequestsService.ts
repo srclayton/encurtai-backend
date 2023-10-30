@@ -14,9 +14,14 @@ export default function tooManyRequests(server: FastifyInstance) {
   // );
   server.setErrorHandler((error, request, reply) => {
     if (error.statusCode === 429) {
-      reply.code(429);
-      error.message = "Too many requests, please try again later.";
+      reply.code(429).send({
+        error: "Too Many Requests",
+        message: error.message,
+      });
     }
-    reply.send(error);
+    // reply.send({
+    //   error: error.name,
+    //   message: error.message,
+    // });
   });
 }

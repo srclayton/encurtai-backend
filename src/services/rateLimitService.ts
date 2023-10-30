@@ -4,7 +4,7 @@ import { FastifyInstance } from "fastify";
 export default async function rateLimitService(server: FastifyInstance) {
   await server.register(fastifyRateLimit, {
     global: true,
-    max: 60,
+    max: 2,
     timeWindow: "1 minute",
   });
   const registeredPlugins = server.printPlugins();

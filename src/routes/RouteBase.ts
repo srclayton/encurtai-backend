@@ -18,8 +18,8 @@ export default class RouteBase {
       controller.getById(request, reply),
     );
 
-    server.post(`/${route}`, async (request, reply) =>
-      controller.create(request, reply),
-    );
+    // server.post(`/${route}`, async (request, reply) =>
+    //   controller.create(request, reply),
+    // );
   }
 }
