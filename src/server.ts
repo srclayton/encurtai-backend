@@ -1,13 +1,13 @@
 import Fastify, { FastifyInstance } from "fastify";
 import dotenv from "dotenv";
 import createLogger from "./config/logger";
-import rateLimitService from "./services/rateLimitService";
-import routesService from "./services/routesService";
 import { PinoLoggerOptions } from "fastify/types/logger";
-import onSendService from "./services/onSendService";
 import tooManyRequests from "./services/tooManyRequestsService";
-import jwtRegisterService from "./services/jwtRegisterService";
-import onRequestService from "./services/onRequestService";
+import SchemaService from "./services/SchemaService";
+import RequestService from "./services/RequestService";
+import RouteService from "./services/RouteService";
+import ReplyService from "./services/ReplyService";
+import JwtService from "./services/JwtService";
 
 dotenv.config();
 
@@ -17,12 +17,15 @@ const server: FastifyInstance = Fastify({
   logger,
 });
 
-rateLimitService(server);
-routesService(server);
-onSendService(server);
-onRequestService(server);
+SchemaService.addUrlSchemas(server);
+SchemaService.addUserSchemas(server);
+
+RequestService.rateLimit(server);
+RouteService.registerRoutes(server);
+ReplyService.onSend(server);
+RequestService.onRequest(server);
 tooManyRequests(server);
-jwtRegisterService(server);
+JwtService.RegisterKeys(server);
 
 // TODO error handling
 const start = async () => {

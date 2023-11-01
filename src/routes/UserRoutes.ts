@@ -9,12 +9,39 @@ export default class UserRoutes extends RouteBase {
   ): Promise<void> {
     await super.register(server, route);
     const controller = new UserController(route);
-    server.post(`/${route}/login`, async (request, reply) =>
-      controller.verifyLogin(request, reply),
+    server.post(
+      `/${route}/login`,
+      {
+        schema: {
+          description:
+            "A rota /login retorna um token de acesso e um token de atualização.",
+          tags: [route],
+          response: {
+            200: {
+              description: "Successful response",
+              $ref: `reply_login_schema#`,
+            },
+          },
+        },
+      },
+      async (request, reply) => controller.verifyLogin(request, reply),
     );
     // @TODO: ADICIONAR A ROTA REFRESH
-    server.post(`/${route}/refresh`, async (request, reply) =>
-      controller.refreshToken(request, reply),
+    server.post(
+      `/${route}/refresh`,
+      {
+        schema: {
+          description: "A rota /refresh retorna um token de acesso.",
+          tags: [route],
+          response: {
+            200: {
+              description: "Successful response",
+              $ref: `reply_refresh_schema#`,
+            },
+          },
+        },
+      },
+      async (request, reply) => controller.refreshToken(request, reply),
     );
   }
 }

@@ -1,17 +1,12 @@
 export default class Url {
   private originalUrl: string;
   private shortUrl: string;
-  private createdAt: Date;
+  private userId: string;
 
-  constructor(
-    id: string,
-    originalUrl: string,
-    shortUrl: string,
-    createdAt: Date,
-  ) {
+  constructor(originalUrl: string, shortUrl: string, userId: string) {
     this.originalUrl = originalUrl;
     this.shortUrl = shortUrl;
-    this.createdAt = createdAt;
+    this.userId = userId;
   }
 
   getOriginalUrl(): string {
@@ -20,9 +15,5 @@ export default class Url {
 
   getShortUrl(): string {
     return this.shortUrl;
-  }
-
-  getCreatedAt(): Date {
-    return this.createdAt;
   }
 }

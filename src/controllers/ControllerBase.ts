@@ -19,10 +19,6 @@ export default class ControllerBase {
     } else return null;
   }
 
-  public async ping(request: FastifyRequest, reply: FastifyReply) {
-    return reply.send({ ping: "pong" });
-  }
-
   public async getAll(request: FastifyRequest, reply: FastifyReply) {
     // Get count of all records
     const count = await this.db.getCount();
