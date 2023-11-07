@@ -58,11 +58,6 @@ export const replyUrlCreateSchema = {
       format: "uuid",
       description: "ID da URL",
     },
-    originalUrl: {
-      type: "string",
-      format: "url",
-      description: "URL original",
-    },
     shortUrl: {
       type: "string",
       format: "url",

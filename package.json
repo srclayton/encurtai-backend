@@ -18,7 +18,8 @@
     "@fastify/rate-limit": "^8.0.3",
     "@prisma/client": "^5.5.0",
     "dotenv": "^16.3.1",
-    "fastify": "^4.24.3"
+    "fastify": "^4.24.3",
+    "typescript": "^5.2.2"
   },
   "devDependencies": {
     "@rocketseat/eslint-config": "^2.1.0",
@@ -26,7 +27,6 @@
     "eslint": "^8.51.0",
     "pino-pretty": "^10.2.3",
     "prisma": "^5.5.0",
-    "tsx": "^3.14.0",
-    "typescript": "^5.2.2"
+    "tsx": "^3.14.0"
   }
 }

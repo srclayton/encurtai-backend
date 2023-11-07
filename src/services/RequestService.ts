@@ -1,14 +1,14 @@
 import fastifyRateLimit from "@fastify/rate-limit";
 import { FastifyInstance } from "fastify";
-import path from "node:path";
 export default class RequestService {
   public static onRequest(server: FastifyInstance) {
     server.addHook("onRequest", (request, reply, done) => {
-      // if (request.protocol !== "https") {
-      //   return reply.redirect(`https://${request.hostname}${request.url}`);
-      // }
-      // const pathh = path.dirname;
-      // server.log.error(path);
+      if (request.protocol !== "https") {
+        return reply.code(400).send({
+          error: "Bad Request",
+          message: "HTTPS required",
+        });
+      }
       if (request.url !== "/user/login") {
         if (!request.headers.authorization) {
           return reply.code(401).send({
