@@ -2,7 +2,6 @@ import { FastifyReply, FastifyRequest } from "fastify";
 import ControllerBase from "./ControllerBase";
 import User from "../models/User";
 import TokenService from "../services/TokenService";
-import server from "../server";
 type UserInput = {
   username: string;
   password: string;
@@ -34,8 +33,11 @@ export default class UserController extends ControllerBase {
       result.admin,
     );
 
-    const access_token = await TokenService.generateToken(server, user);
-    const refresh_token = await TokenService.generateRefreshToken(server, user);
+    const access_token = await TokenService.generateToken(request.server, user);
+    const refresh_token = await TokenService.generateRefreshToken(
+      request.server,
+      user,
+    );
     return reply.code(200).send({
       access_token,
       refresh_token,
@@ -55,7 +57,7 @@ export default class UserController extends ControllerBase {
       result.password,
       result.admin,
     );
-    const access_token = await TokenService.generateToken(server, user);
+    const access_token = await TokenService.generateToken(request.server, user);
     reply.code(200).send({ access_token });
   }
 }

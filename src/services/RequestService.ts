@@ -1,17 +1,20 @@
 import fastifyRateLimit from "@fastify/rate-limit";
 import { FastifyInstance } from "fastify";
-
+import path from "node:path";
 export default class RequestService {
   public static onRequest(server: FastifyInstance) {
     server.addHook("onRequest", (request, reply, done) => {
       // if (request.protocol !== "https") {
       //   return reply.redirect(`https://${request.hostname}${request.url}`);
       // }
+      // const pathh = path.dirname;
+      // server.log.error(path);
       if (request.url !== "/user/login") {
         if (!request.headers.authorization) {
           return reply.code(401).send({
             error: "Unauthorized",
             message: "No authorization header",
+            // pathh,
           });
         }
       } else return done();
@@ -50,10 +53,5 @@ export default class RequestService {
       max: 60,
       timeWindow: "1 minute",
     });
-    const registeredPlugins = server.printPlugins();
-    const registeredRoutes = server.printRoutes();
-    server.log.info(
-      `registered plugins: \n${registeredPlugins} registered routes: \n${registeredRoutes}`,
-    );
   }
 }

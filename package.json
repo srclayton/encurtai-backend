@@ -1,10 +1,12 @@
 {
-  "name": "encurtador-de-urls",
+  "name": "encurtai",
   "version": "1.0.0",
-  "description": "Este e um simples encurtador de URLs construido com o Fastify. O aplicativo permite que voce encurte URLs longas, facilitando o compartilhamento e o acompanhamento de links.",
+  "description": "Este e um simples encurtador de URLs construído com o Fastify. O aplicativo permite que voce encurte URLs longas, facilitando o compartilhamento e o acompanhamento de links.",
   "main": "server.ts",
   "scripts": {
-    "dev": "tsx watch src/server.ts ",
+    "dev": "tsx watch src/start.ts ",
+    "start": "node dist/start.js",
+    "build": "tsc && prisma generate",
     "lint": "eslint src --ext .ts --fix",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

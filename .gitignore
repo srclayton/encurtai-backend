@@ -3,7 +3,12 @@ node_modules
 .env
 etc
 .vscode
-prisma
+migrations
+prisma_dev
 .eslintrc.json
 package-lock.json
 dist
+.vercel
+api
+.vercelignore
+vercel.json
