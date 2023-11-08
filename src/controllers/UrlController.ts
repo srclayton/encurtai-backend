@@ -14,7 +14,10 @@ export default class UrlController extends ControllerBase {
   }
 
   public async createShortUrl(request: FastifyRequest, reply: FastifyReply) {
-    const { originalUrl } = request.body as { originalUrl: string };
+    const { originalUrl, personalUrl } = request.body as {
+      originalUrl: string;
+      personalUrl: string;
+    };
 
     if (!originalUrl) {
       return reply.code(400).send({
@@ -23,10 +26,21 @@ export default class UrlController extends ControllerBase {
       });
     }
     let shortUrl, result;
-    do {
-      shortUrl = UrlService.generateShortUrl();
-      result = await this.db.getByField("shortUrl", shortUrl);
-    } while (result);
+    if (personalUrl) {
+      result = await this.db.getByField("shortUrl", personalUrl);
+      if (result) {
+        return reply.code(400).send({
+          error: "Bad request",
+          message: "Personal URL already exists",
+        });
+      }
+      shortUrl = personalUrl;
+    } else {
+      do {
+        shortUrl = UrlService.generateShortUrl();
+        result = await this.db.getByField("shortUrl", shortUrl);
+      } while (result);
+    }
     const url = new Url(
       originalUrl,
       shortUrl,

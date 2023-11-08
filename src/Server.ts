@@ -1,17 +1,11 @@
-import Fastify, {
-  FastifyInstance,
-  FastifyReply,
-  FastifyRequest,
-} from "fastify";
+import { FastifyInstance } from "fastify";
 import dotenv from "dotenv";
-import createLogger from "./config/logger";
-import { PinoLoggerOptions } from "fastify/types/logger";
-import tooManyRequests from "./services/tooManyRequestsService";
 import SchemaService from "./services/SchemaService";
 import RequestService from "./services/RequestService";
 import RouteService from "./services/RouteService";
 import ReplyService from "./services/ReplyService";
 import JwtService from "./services/JwtService";
+import ErrorHandler from "./services/ErrorHandler";
 
 export default class Server {
   public static main(server: FastifyInstance) {
@@ -26,7 +20,7 @@ export default class Server {
     RouteService.registerRoutes(server);
     ReplyService.onSend(server);
     RequestService.onRequest(server);
-    tooManyRequests(server);
+    ErrorHandler.setErrorHandler(server);
     JwtService.RegisterKeys(server);
 
     // TODO error handling
@@ -40,10 +34,5 @@ export default class Server {
       }
     };
     start();
-
-    // export default async (request: FastifyRequest, reply: FastifyReply) => {
-    //   await server.ready();
-    //   server.server.emit("request", request, reply);
-    // };
   }
 }

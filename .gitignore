@@ -7,8 +7,4 @@ migrations
 prisma_dev
 .eslintrc.json
 package-lock.json
-dist
-.vercel
 api
-.vercelignore
-vercel.json
