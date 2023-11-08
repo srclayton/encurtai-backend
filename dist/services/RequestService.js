@@ -18,12 +18,12 @@ class RequestService {
         server.addHook("onRequest", (request, reply, done) => {
             // eslint-disable-next-line
             //@ts-ignore
-            if (request.protocol !== "https" && server.NODE_ENV !== "development") {
-                return reply.code(400).send({
-                    error: "Bad Request",
-                    message: "HTTPS required",
-                });
-            }
+            // if (request.protocol !== "https" && server.NODE_ENV !== "development") {
+            //   return reply.code(400).send({
+            //     error: "Bad Request",
+            //     message: "HTTPS required",
+            //   });
+            // }
             if (request.url !== "/user/login" ||
                 (request.url === "/user/login" && request.method !== "POST")) {
                 if (!request.headers.authorization) {
