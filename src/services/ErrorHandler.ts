@@ -15,13 +15,14 @@ export default class ErrorHandler {
     // );
     server.setErrorHandler((error, request, reply) => {
       if (error.statusCode === 429) {
-        reply.code(429).send({
+        server.log.warn(error);
+        return reply.code(429).send({
           error: "Too Many Requests",
           message: error.message,
         });
       }
       server.log.error(error);
-      reply.send({
+      return reply.send({
         error: error.name,
         message: error.message,
       });
