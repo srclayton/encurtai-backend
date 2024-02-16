@@ -44,6 +44,10 @@ export default class JwtService {
           public: jwtPublicSignKey,
         },
         sign: { algorithm: "RS256" },
+        cookie: {
+          cookieName: "accessToken", // optional, by default is 'jwt'
+          signed: true, // optional, by default is true
+        },
       });
     } catch (err) {
       server.log.error(err);

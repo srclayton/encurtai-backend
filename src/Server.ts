@@ -6,13 +6,16 @@ import RouteService from "./services/RouteService";
 import ReplyService from "./services/ReplyService";
 import JwtService from "./services/JwtService";
 import ErrorHandler from "./services/ErrorHandler";
-
 export default class Server {
   public static main(server: FastifyInstance) {
     dotenv.config();
     const PORT = process.env.SERVER_PORT
       ? parseInt(process.env.SERVER_PORT)
       : 5541;
+    const ORIGIN = process.env.CORS_ORIGIN?.split(",");
+    server.decorate("ORIGIN", ORIGIN);
+    RequestService.registerCorsAndCookie(server);
+
     SchemaService.addUrlSchemas(server);
     SchemaService.addUserSchemas(server);
 
@@ -22,8 +25,6 @@ export default class Server {
     RequestService.onRequest(server);
     ErrorHandler.setErrorHandler(server);
     JwtService.RegisterKeys(server);
-
-    // TODO error handling
 
     const start = async () => {
       try {

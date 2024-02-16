@@ -16,12 +16,12 @@ export default class UserRoutes extends RouteBase {
           description:
             "A rota /login retorna um token de acesso e um token de atualização.",
           tags: [route],
-          response: {
-            200: {
-              description: "Successful response",
-              $ref: `reply_login_schema#`,
-            },
-          },
+          // response: {
+          //   200: {
+          //     description: "Successful response",
+          //     $ref: `reply_login_schema#`,
+          //   },
+          // },
         },
       },
       async (request, reply) => controller.verifyLogin(request, reply),
