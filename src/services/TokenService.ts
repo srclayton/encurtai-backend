@@ -1,4 +1,4 @@
-import { FastifyInstance } from "fastify";
+import { FastifyInstance, FastifyReply } from "fastify";
 import User from "../models/User";
 const JWT_ISSUER = process.env.JWT_ISSUER;
 const JWT_AUDIENCE = process.env.JWT_AUDIENCE;
@@ -43,5 +43,39 @@ export default class TokenService {
       console.error(err);
       throw err;
     }
+  }
+
+  static setCookieToken(
+    reply: FastifyReply,
+    access_token: string,
+    refresh_token: string,
+  ) {
+    reply
+      .setCookie("accessToken", access_token, {
+        httpOnly: true,
+        secure: true,
+        path: "/",
+      })
+      .setCookie("refreshToken", refresh_token, {
+        httpOnly: true,
+        secure: true,
+        path: "/",
+      });
+  }
+
+  static clearCookieToken(reply: FastifyReply) {
+    reply.clearCookie("accessToken").clearCookie("refreshToken");
+  }
+
+  static setRefreshTokenCookie(reply: FastifyReply, refresh_token: string) {
+    reply.setCookie("accessToken", refresh_token, {
+      httpOnly: true,
+      secure: true,
+      path: "/",
+    });
+  }
+
+  static clearRefreshTokenCookie(reply: FastifyReply) {
+    reply.clearCookie("accessToken");
   }
 }

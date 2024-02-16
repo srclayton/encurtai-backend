@@ -12,7 +12,7 @@ export default class UserController extends ControllerBase {
     if (!username || !password) {
       return reply.code(400).send({
         error: "Bad request",
-        message: "Login and password are required",
+        message: "username and password are required",
       });
     }
     const result = await this.db.getByField("username", username);
@@ -38,10 +38,9 @@ export default class UserController extends ControllerBase {
       request.server,
       user,
     );
-    return reply.code(200).send({
-      access_token,
-      refresh_token,
-    });
+    TokenService.clearCookieToken(reply);
+    TokenService.setCookieToken(reply, access_token, refresh_token);
+    return reply.code(200).send();
   }
 
   public async refreshToken(request: FastifyRequest, reply: FastifyReply) {
@@ -58,6 +57,8 @@ export default class UserController extends ControllerBase {
       result.admin,
     );
     const access_token = await TokenService.generateToken(request.server, user);
+    TokenService.clearRefreshTokenCookie(reply);
+    TokenService.setRefreshTokenCookie(reply, access_token);
     reply.code(200).send({ access_token });
   }
 }
