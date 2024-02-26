@@ -54,11 +54,13 @@ export default class TokenService {
       .setCookie("accessToken", access_token, {
         httpOnly: true,
         secure: true,
+        sameSite: "strict",
         path: "/",
       })
       .setCookie("refreshToken", refresh_token, {
         httpOnly: true,
         secure: true,
+        sameSite: "strict",
         path: "/",
       });
   }
@@ -71,6 +73,7 @@ export default class TokenService {
     reply.setCookie("accessToken", refresh_token, {
       httpOnly: true,
       secure: true,
+      sameSite: "strict",
       path: "/",
     });
   }

@@ -61,4 +61,8 @@ export default class UserController extends ControllerBase {
     TokenService.setRefreshTokenCookie(reply, access_token);
     reply.code(200).send({ access_token });
   }
+
+  public async hasCookie(request: FastifyRequest, reply: FastifyReply) {
+    return reply.code(200).send();
+  }
 }

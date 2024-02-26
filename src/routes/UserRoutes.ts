@@ -13,15 +13,11 @@ export default class UserRoutes extends RouteBase {
       `/${route}/login`,
       {
         schema: {
+          // eslint-disable-next-line
+          //@ts-ignore
           description:
             "A rota /login retorna um token de acesso e um token de atualização.",
           tags: [route],
-          // response: {
-          //   200: {
-          //     description: "Successful response",
-          //     $ref: `reply_login_schema#`,
-          //   },
-          // },
         },
       },
       async (request, reply) => controller.verifyLogin(request, reply),
@@ -42,6 +38,19 @@ export default class UserRoutes extends RouteBase {
         },
       },
       async (request, reply) => controller.refreshToken(request, reply),
+    );
+    server.get(
+      `/${route}/hasCookie`,
+      {
+        schema: {
+          // eslint-disable-next-line
+          //@ts-ignore
+          description:
+            "A rota /hasCookie verifica se o usuário possui accessToken.",
+          tags: [route],
+        },
+      },
+      async (request, reply) => controller.hasCookie(request, reply),
     );
   }
 }
