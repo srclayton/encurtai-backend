@@ -1,46 +1,52 @@
-
-
 <h1 align="center">Encurtaí</h1>
 
 <div align="center">
 
 [![Status](https://img.shields.io/badge/status-active-success.svg)]()
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](/LICENSE)
 
 </div>
 
 ---
 
-<p> <h3>Encurtai-backend</h3>
-    <br> 
-    Este é um projeto de um encurtamento de URLs. A aplicação permite que os usuários insiram uma URL longa e recebam uma URL encurtada como resultado. A URL encurtada pode ser gerada aleatoriamente ou personalizada pelo usuário. Atualmente, o projeto se concentra no encurtamento de URLs, mas também está planejando a introdução da geração de QR codes.
-</p>
+## Overview
 
-## 📝 Table of Contents
+O backend do projeto Encurtaí é responsável por gerenciar as solicitações dos usuários para encurtar URLs e lidar com a lógica de armazenamento e recuperação de dados no banco de dados.
 
-- [Exemplos](#exemplos)
-- [Tecnologias Utilizadas](#tec)
+## Funcionalidades
 
+- Enviar URLs longas para serem encurtadas.
+- Receber URLs encurtadas como resultado.
+- Opção de gerar URLs encurtadas aleatoriamente ou personalizadas.
+- Integração com backend para processamento das URLs.
 
-## 🧐 Exemplos de Uso  <a name = "exemplos"></a>
+## Tecnologias Utilizadas
 
-#### Exemplo 1 - URL Aleatória
+- **Fastify**: Framework web rápido e eficiente para Node.js.
+- **@fastify/cookie**: Plugin para manipulação de cookies no Fastify.
+- **@fastify/cors**: Plugin para habilitar Cross-Origin Resource Sharing (CORS) no Fastify.
+- **@fastify/jwt**: Plugin para autenticação baseada em JSON Web Tokens (JWT) no Fastify.
+- **@fastify/rate-limit**: Plugin para limitação de taxa de solicitações no Fastify.
+- **Prisma**: Biblioteca de acesso a banco de dados que facilita a interação com o banco de dados.
 
-- **URL Original**: 
-``` https://example.com/Lorem-ipsum-dolor-sit-amet ```
-- **URL Encurtada (Aleatória)**: 
-``` https://example.com/kfGhuis ```
+## Instalação
 
-#### Exemplo 2 - URL Personalizada
+Para executar o backend do projeto, siga os passos abaixo:
 
-- **URL Original**: 
-``` https://example.com/Lorem-ipsum-dolor-sit-amet ```
-- **URL Encurtada (Aleatória)**: 
-``` https://example.com/my-url ```
+1. Certifique-se de ter o Node.js e o npm instalados em seu sistema.
+1. Clone o repositório para o seu ambiente local.
+1. Navegue até o diretório no terminal.
+1. Certifique-se de ter um arquivo `.env` no diretório raiz do projeto, contendo as variáveis de ambiente necessárias. Você pode se basear em um arquivo de exemplo fornecido no repositório.
+1. Instale as dependências utilizando o comando:
 
-___
-## ⛏️  Tecnologias Utilizadas <a name = "tec"></a>
+   ```
+   npm install
+   ```
 
-- **Fastify**: Fastify é um framework web incrivelmente rápido e eficiente para Node.js. Ele é usado no lado do servidor para gerenciar as solicitações dos usuários e lidar com o encurtamento de URLs.
+1. Após a instalação das dependências, inicie o servidor de desenvolvimento com o comando:
 
-- **Prisma**: Prisma é uma biblioteca de acesso a banco de dados que facilita a interação com o banco de dados. É usado para armazenar e recuperar informações sobre as URLs encurtadas.
+   ```
+   npm run dev
+   ```
+
+1. O servidor de desenvolvimento estará disponível em http://localhost:5541 por padrão.
+
